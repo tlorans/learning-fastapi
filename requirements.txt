@@ -1,1 +1,2 @@
 fastapi[all]
+git+https://github.com/tlorans/my_data_package.git
