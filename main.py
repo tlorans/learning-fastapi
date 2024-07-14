@@ -5,16 +5,9 @@ import my_data_package
 
 app = FastAPI()
 
-# Define zone mapping including composite zones
-zone_mapping = {
-    "Zone A": ["Zone A"],
-    "Zone B": ["Zone B"],
-    "Zone C": ["Zone C"],
-    "Zone D": ["Zone D"],
-    "Zone E": ["Zone A", "Zone B"],
-    "Zone F": ["Zone C", "Zone D"],
-    # Add more composite zones as needed
-}
+
+zone_mapping = my_data_package.load_zone_mapping()
+
 
 @app.get("/")
 def index():
@@ -23,7 +16,6 @@ def index():
 @app.get("/investment_zone/{zone}")
 def get_stocks_by_zone(zone: str = Path(description="The investment zone of the stocks you want to view")):
     # Load zone mapping from JSON file
-    zone_mapping = my_data_package.get_zone_mapping()
     
     if zone not in zone_mapping:
         return {"message": "Zone not found"}
